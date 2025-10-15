@@ -1,6 +1,7 @@
 package org.telegram.ui.Components;
 
 import static org.telegram.messenger.AndroidUtilities.dp;
+import static org.telegram.messenger.AndroidUtilities.dpf2;
 import static org.telegram.messenger.LocaleController.getString;
 
 import android.annotation.SuppressLint;
@@ -127,14 +128,15 @@ public class ProfileActionsView extends View {
         paint.setColor(Color.BLACK);
         paint.setAlpha(40);
 
-        xpadding = AndroidUtilities.dpf2(14);
-        ypadding = AndroidUtilities.dpf2(12);
-        top = AndroidUtilities.dpf2(8);
-        textPadding = AndroidUtilities.dpf2(4);
+        xpadding = dpf2(14);
+        ypadding = dpf2(12);
+        top = dpf2(8);
+        textPadding = dpf2(4);
 
         this.targetHeight = (int) (targetHeight - ypadding - top);
 
-        textPaint.setTextSize(AndroidUtilities.dpf2(11));
+        textPaint.setTextSize(dpf2(11));
+        textPaint.setTypeface(AndroidUtilities.bold());
         textPaint.setColor(Color.WHITE);
         setBackgroundColor(0);
     }
@@ -428,7 +430,7 @@ public class ProfileActionsView extends View {
 
         updateBounds(action);
 
-        float textY = action.drawable.getBounds().bottom + action.drawable.getBounds().top - action.text.getHeight() * action.textScale / 2.0f;
+        float textY = action.drawable.getBounds().bottom + action.drawable.getBounds().top - action.text.getHeight() * action.textScale / 2.0f - dp(2);
         if (OctoConfig.INSTANCE.md3ChatActions.getValue()) {
             textY = getTop() + getMeasuredHeight() - getMeasuredHeight() / 4f - action.text.getHeight() * action.textScale / 2.0f;
             if (asPreview) textY -= 3;
@@ -490,7 +492,7 @@ public class ProfileActionsView extends View {
                         Theme.multAlpha(loadingColor, .8f)
                 );
                 action.loadingDrawable.setAppearByGradient(true);
-                action.loadingDrawable.strokePaint.setStrokeWidth(AndroidUtilities.dpf2(1.25f));
+                action.loadingDrawable.strokePaint.setStrokeWidth(dpf2(1.25f));
             } else if (action.loadingDrawable.isDisappeared() || action.loadingDrawable.isDisappearing()) {
                 action.loadingDrawable.reset();
                 action.loadingDrawable.resetDisappear();
@@ -514,6 +516,7 @@ public class ProfileActionsView extends View {
     }
 
     public float getRoundRadius() {
+        //return dp(10);
         return dp(OctoConfig.INSTANCE.md3ChatActions.getValue() ? 25 : 8);
     }
 
@@ -1050,7 +1053,9 @@ public class ProfileActionsView extends View {
         private float textScale = 1.0f;
 
         public void setText(CharSequence cs) {
-            this.text = new Text(cs, 11).multiline(3).align(Layout.Alignment.ALIGN_CENTER);
+            this.text = new Text(cs, 11, AndroidUtilities.bold())
+                .multiline(3)
+                .align(Layout.Alignment.ALIGN_CENTER);
         }
 
         boolean isOpening = false;
