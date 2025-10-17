@@ -21,6 +21,21 @@ import it.octogram.android.utils.ai.MainAiHelper;
 import it.octogram.android.utils.network.MultipartHTTPRequest;
 import it.octogram.android.utils.network.StandardHTTPRequest;
 
+/**
+ * Helper class for OpenAI Whisper Speech-to-Text API integration.
+ * <p>
+ * This implementation uses OpenAI's cloud-based Whisper API for audio transcription.
+ * It follows the same pattern as GeminiHelper for consistency.
+ * <p>
+ * Supported models:
+ * - whisper-1: General-purpose transcription (default)
+ * <p>
+ * TODO: Future enhancement - Add support for local Whisper model using whisper.cpp
+ * for offline transcription without API costs. This would require:
+ * - Native whisper.cpp library integration via JNI
+ * - Model file management (whisper-base.bin ~140MB or whisper-small.bin ~460MB)
+ * - Audio format conversion to 16kHz WAV
+ */
 public class WhisperHelper {
     private static final String TAG = "WhisperHelper";
     private static final String WHISPER_API_URL = "https://api.openai.com/v1/audio/transcriptions";

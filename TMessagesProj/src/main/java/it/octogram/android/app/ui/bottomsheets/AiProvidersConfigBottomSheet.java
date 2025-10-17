@@ -577,19 +577,20 @@ public class AiProvidersConfigBottomSheet extends BottomSheet {
             if (p == CurrentStep.INITIAL_STAGE && !skipToApiKeyConfig) {
                 boolean isChatGPT = provider == AiProvidersDetails.CHATGPT;
                 boolean isOpenRouter = provider == AiProvidersDetails.OPENROUTER;
+                boolean isWhisper = provider == AiProvidersDetails.WHISPER;
                 linearLayout.addView(
                         makeHint(
                                 R.drawable.msg_language,
-                                getString(isChatGPT ? R.string.AiFeatures_AccessVia_Login_ChatGPT_1 : isOpenRouter ? R.string.AiFeatures_AccessVia_Login_OpenRouter_1 : R.string.AiFeatures_AccessVia_Login_Google_1),
-                                getString(isChatGPT ? R.string.AiFeatures_AccessVia_Login_ChatGPT_1_Desc : isOpenRouter ? R.string.AiFeatures_AccessVia_Login_OpenRouter_1_Desc : R.string.AiFeatures_AccessVia_Login_Google_1_Desc)
+                                getString(isChatGPT ? R.string.AiFeatures_AccessVia_Login_ChatGPT_1 : isOpenRouter ? R.string.AiFeatures_AccessVia_Login_OpenRouter_1 : isWhisper ? R.string.AiFeatures_AccessVia_Login_Whisper_1 : R.string.AiFeatures_AccessVia_Login_Google_1),
+                                getString(isChatGPT ? R.string.AiFeatures_AccessVia_Login_ChatGPT_1_Desc : isOpenRouter ? R.string.AiFeatures_AccessVia_Login_OpenRouter_1_Desc : isWhisper ? R.string.AiFeatures_AccessVia_Login_Whisper_1_Desc : R.string.AiFeatures_AccessVia_Login_Google_1_Desc)
                         ),
                         LayoutHelper.createLinear(LayoutHelper.MATCH_PARENT, LayoutHelper.WRAP_CONTENT, Gravity.FILL_HORIZONTAL, 32, 0, 32, 16)
                 );
                 linearLayout.addView(
                         makeHint(
                                 R.drawable.edit_passcode,
-                                getString(isChatGPT ? R.string.AiFeatures_AccessVia_Login_ChatGPT_2 : isOpenRouter ? R.string.AiFeatures_AccessVia_Login_OpenRouter_2 : R.string.AiFeatures_AccessVia_Login_Google_2),
-                                getString(isChatGPT ? R.string.AiFeatures_AccessVia_Login_ChatGPT_2_Desc : isOpenRouter ? R.string.AiFeatures_AccessVia_Login_OpenRouter_2_Desc : R.string.AiFeatures_AccessVia_Login_Google_2_Desc)
+                                getString(isChatGPT ? R.string.AiFeatures_AccessVia_Login_ChatGPT_2 : isOpenRouter ? R.string.AiFeatures_AccessVia_Login_OpenRouter_2 : isWhisper ? R.string.AiFeatures_AccessVia_Login_Whisper_2 : R.string.AiFeatures_AccessVia_Login_Google_2),
+                                getString(isChatGPT ? R.string.AiFeatures_AccessVia_Login_ChatGPT_2_Desc : isOpenRouter ? R.string.AiFeatures_AccessVia_Login_OpenRouter_2_Desc : isWhisper ? R.string.AiFeatures_AccessVia_Login_Whisper_2_Desc : R.string.AiFeatures_AccessVia_Login_Google_2_Desc)
                         ),
                         LayoutHelper.createLinear(LayoutHelper.MATCH_PARENT, LayoutHelper.WRAP_CONTENT, Gravity.FILL_HORIZONTAL, 32, 0, 32, 16)
                 );
@@ -608,6 +609,12 @@ public class AiProvidersConfigBottomSheet extends BottomSheet {
                         LayoutHelper.createLinear(LayoutHelper.MATCH_PARENT, LayoutHelper.WRAP_CONTENT, Gravity.FILL_HORIZONTAL, 32, 0, 32, 16)
                 );
                 if (provider == AiProvidersDetails.CHATGPT) {
+                    linearLayout.addView(
+                            makeHint(R.drawable.msg_payment_card, getString(R.string.AiFeatures_AccessVia_Login_ExtraStep_Warning_3), formatString(R.string.AiFeatures_AccessVia_Login_ExtraStep_Warning_3_Desc, serviceName)),
+                            LayoutHelper.createLinear(LayoutHelper.MATCH_PARENT, LayoutHelper.WRAP_CONTENT, Gravity.FILL_HORIZONTAL, 32, 0, 32, 16)
+                    );
+                }
+                if (provider == AiProvidersDetails.WHISPER) {
                     linearLayout.addView(
                             makeHint(R.drawable.msg_payment_card, getString(R.string.AiFeatures_AccessVia_Login_ExtraStep_Warning_3), formatString(R.string.AiFeatures_AccessVia_Login_ExtraStep_Warning_3_Desc, serviceName)),
                             LayoutHelper.createLinear(LayoutHelper.MATCH_PARENT, LayoutHelper.WRAP_CONTENT, Gravity.FILL_HORIZONTAL, 32, 0, 32, 16)
