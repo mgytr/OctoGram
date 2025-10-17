@@ -16,6 +16,7 @@ import it.octogram.android.utils.OctoLogging;
 import it.octogram.android.utils.ai.chatgpt.ChatGPTHelper;
 import it.octogram.android.utils.ai.gemini.GeminiHelper;
 import it.octogram.android.utils.ai.openrouter.OpenRouterHelper;
+import it.octogram.android.utils.ai.whisper.WhisperHelper;
 
 public class MainAiHelper {
     public static final String systemInstructions = "Use only plain text or Telegram-supported MarkdownV2.\n\nAllowed formatting (Telegram MarkdownV2):\n- **bold** → wrap text with double asterisks (**text**)\n- __italic__ → wrap text with double underscores (__text__)\n- `inline code` → wrap text with single backticks (`text`)\n- ```code block``` → wrap text with triple backticks (```code```)\n- Lists → start each item with a dash and a space (e.g. '- item')\n\nDo NOT use:\n- Lists with '*' or '+'\n- Headings with '#' (e.g. ###)\n- Blockquotes with '>'\n- Links, tables, or any unsupported Markdown features\n\nExamples:\n✅ **bold text**\n✅ __italic text__\n✅ `inline code`\n✅ ```\ncode block\n```\n✅ - item one\n✅ - item two\n❌ * item one\n❌ + item two\n❌ ### heading\n❌ > quote\n\nOnly the rules above are valid.";
@@ -31,6 +32,7 @@ public class MainAiHelper {
         if (GeminiHelper.isAvailable()) i++;
         if (ChatGPTHelper.isAvailable()) i++;
         if (OpenRouterHelper.isAvailable()) i++;
+        if (WhisperHelper.isAvailable()) i++;
         return i;
     }
 
@@ -43,7 +45,7 @@ public class MainAiHelper {
     }
 
     public static AiProvidersDetails getPreferredProvider() {
-        AiProvidersDetails favoriteProvider = GeminiHelper.isAvailable() ? AiProvidersDetails.GEMINI : ChatGPTHelper.isAvailable() ? AiProvidersDetails.CHATGPT : AiProvidersDetails.OPENROUTER;
+        AiProvidersDetails favoriteProvider = GeminiHelper.isAvailable() ? AiProvidersDetails.GEMINI : ChatGPTHelper.isAvailable() ? AiProvidersDetails.CHATGPT : WhisperHelper.isAvailable() ? AiProvidersDetails.WHISPER : AiProvidersDetails.OPENROUTER;
         if (!hasAvailableProviders()) {
             favoriteProvider = null;
         }
@@ -55,6 +57,8 @@ public class MainAiHelper {
             favoriteProvider = AiProvidersDetails.CHATGPT;
         } else if (recentProvider == AiProvidersDetails.OPENROUTER.getId() && OpenRouterHelper.isAvailable()) {
             favoriteProvider = AiProvidersDetails.OPENROUTER;
+        } else if (recentProvider == AiProvidersDetails.WHISPER.getId() && WhisperHelper.isAvailable()) {
+            favoriteProvider = AiProvidersDetails.WHISPER;
         }
 
         return favoriteProvider;
@@ -67,6 +71,8 @@ public class MainAiHelper {
             return ChatGPTHelper.isAvailable();
         } else if (preferredProvider == AiProvidersDetails.OPENROUTER) {
             return OpenRouterHelper.isAvailable();
+        } else if (preferredProvider == AiProvidersDetails.WHISPER) {
+            return WhisperHelper.isAvailable();
         } else {
             OctoLogging.e(TAG, "Unknown provider: " + preferredProvider);
             return false;
@@ -91,6 +97,8 @@ public class MainAiHelper {
             ChatGPTHelper.prompt(aiPrompt, state);
         } else if (preferredProvider == AiProvidersDetails.OPENROUTER) {
             OpenRouterHelper.prompt(aiPrompt, state);
+        } else if (preferredProvider == AiProvidersDetails.WHISPER) {
+            WhisperHelper.prompt(aiPrompt, state);
         } else {
             OctoLogging.e(TAG, "Unknown provider: " + preferredProvider);
             state.onFailed();

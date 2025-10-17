@@ -208,6 +208,17 @@ enum class AiProvidersDetails(
         statusProperty = OctoConfig.INSTANCE.aiFeaturesUseOpenRouterAPIs,
         keyProperty = OctoConfig.INSTANCE.aiFeaturesOpenRouterAPIKey,
         needWarningZone = true
+    ),
+    WHISPER(
+        id = 3,
+        title = "Whisper",
+        useThisProviderString = getString(R.string.AiFeatures_AccessVia_WhisperAPI),
+        keyMinLength = 100,
+        keyMaxLength = 180,
+        animationScope = OctoAnimationFragment.OctoAnimationScopes.CHATGPT,
+        statusProperty = OctoConfig.INSTANCE.aiFeaturesUseWhisperAPI,
+        keyProperty = OctoConfig.INSTANCE.aiFeaturesWhisperAPIKey,
+        needWarningZone = true
     );
 
     companion object {

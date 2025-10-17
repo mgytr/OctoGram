@@ -132,6 +132,7 @@
     <string name="AiFeatures_AccessVia_GoogleAPI">Google API</string>
     <string name="AiFeatures_AccessVia_ChatGPTAPI">ChatGPT API</string>
     <string name="AiFeatures_AccessVia_OpenRouterAPI">OpenRouter API</string>
+    <string name="AiFeatures_AccessVia_WhisperAPI">Whisper API</string>
     <string name="AiFeatures_AccessVia_Empty">At least one provider must be enabled to use AI features.</string>
     <string name="AiFeatures_AccessVia_AddMore">You can add multiple providers and choose the one you prefer individually when using an AI feature.</string>
     <string name="AiFeatures_AccessVia_Empty_Disable">Disable</string>
@@ -149,6 +150,10 @@
     <string name="AiFeatures_AccessVia_Login_OpenRouter_1_Desc">Access the OpenRouter Console through this link: <![CDATA[<a href="https://openrouter.ai/settings/keys">openrouter.ai</a>]]>.</string>
     <string name="AiFeatures_AccessVia_Login_OpenRouter_2">Create new key</string>
     <string name="AiFeatures_AccessVia_Login_OpenRouter_2_Desc">If you do not have it, click on the "Create Key" button.</string>
+    <string name="AiFeatures_AccessVia_Login_Whisper_1">Open OpenAI Platform</string>
+    <string name="AiFeatures_AccessVia_Login_Whisper_1_Desc">Access the OpenAI Console through this link: <![CDATA[<a href="https://platform.openai.com/api-keys">platform.openai.com</a>]]>.</string>
+    <string name="AiFeatures_AccessVia_Login_Whisper_2">Create new key</string>
+    <string name="AiFeatures_AccessVia_Login_Whisper_2_Desc">If you do not have it, click on the "Create new secret key" button.</string>
     <string name="AiFeatures_AccessVia_Login_3">Copy the key</string>
     <string name="AiFeatures_AccessVia_Login_3_Desc">Copy the API Key you generated and go to the next step.</string>
     <string name="AiFeatures_AccessVia_Login_Step2">Insert the API Key</string>

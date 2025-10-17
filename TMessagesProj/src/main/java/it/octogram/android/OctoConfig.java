@@ -319,6 +319,11 @@ public class OctoConfig {
     public final ConfigProperty<String> aiFeaturesOpenRouterAPIKey = newConfigProperty("aiFeaturesOpenRouterAPIKey", "");
     public final ConfigProperty<String> aiFeaturesOpenRouterSelectedModel = newConfigProperty("aiFeaturesOpenRouterSelectedModel", OpenRouterModels.GOOGLE_GEMINI_2_0_FLASH_EXP_FREE);
 
+    // Whisper STT API
+    public final ConfigProperty<Boolean> aiFeaturesUseWhisperAPI = newConfigProperty("aiFeaturesUseWhisperAPI", false);
+    public final ConfigProperty<String> aiFeaturesWhisperAPIKey = newConfigProperty("aiFeaturesWhisperAPIKey", "");
+    public final ConfigProperty<String> aiFeaturesWhisperModel = newConfigProperty("aiFeaturesWhisperModel", "whisper-1");
+
     /*Lite Mode: sync power saver with device settings*/
     public final ConfigProperty<Boolean> syncPowerSaver = newConfigProperty("syncPowerSaver", false);
 
