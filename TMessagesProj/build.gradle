@@ -90,6 +90,10 @@ dependencies {
     // Generative Ai
     implementation libs.generativeai
 
+    // TensorFlow Lite for local Whisper STT
+    implementation libs.tensorflow.lite
+    implementation libs.tensorflow.lite.support
+
     compileOnly libs.findbugs.jsr305
     compileOnly libs.checker.qual
     compileOnly libs.checker.compat.qual

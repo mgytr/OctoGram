@@ -211,14 +211,14 @@ enum class AiProvidersDetails(
     ),
     WHISPER(
         id = 3,
-        title = "Whisper",
-        useThisProviderString = getString(R.string.AiFeatures_AccessVia_WhisperAPI),
-        keyMinLength = 100,
-        keyMaxLength = 180,
+        title = "Whisper (Local)",
+        useThisProviderString = getString(R.string.AiFeatures_AccessVia_WhisperLocal),
+        keyMinLength = 0,
+        keyMaxLength = 0,
         animationScope = OctoAnimationFragment.OctoAnimationScopes.CHATGPT,
-        statusProperty = OctoConfig.INSTANCE.aiFeaturesUseWhisperAPI,
-        keyProperty = OctoConfig.INSTANCE.aiFeaturesWhisperAPIKey,
-        needWarningZone = true
+        statusProperty = OctoConfig.INSTANCE.aiFeaturesUseLocalWhisper,
+        keyProperty = null,
+        needWarningZone = false
     );
 
     companion object {
