@@ -97,9 +97,15 @@ public class WhisperHelper {
                 request.addFilePart("file", fileName, mimeType, audioData);
                 request.addFormField("model", OctoConfig.INSTANCE.aiFeaturesWhisperModel.getValue());
                 
-                // Add optional parameters if provided in prompt
-                if (!aiPrompt.getPrompt().isEmpty()) {
-                    request.addFormField("prompt", aiPrompt.getPrompt());
+                // Extract language from prompt if present
+                String promptText = aiPrompt.getPrompt();
+                if (!promptText.isEmpty()) {
+                    // Check if prompt contains language information (e.g., "#language" replaced with actual language)
+                    // Whisper API supports language parameter for better accuracy
+                    String language = extractLanguageFromPrompt(promptText);
+                    if (language != null && !language.isEmpty() && !language.contains("#")) {
+                        request.addFormField("language", language);
+                    }
                 }
 
                 String responseBody = request.execute();
@@ -133,6 +139,18 @@ public class WhisperHelper {
 
     private static String getApiKey() {
         return OctoConfig.INSTANCE.aiFeaturesWhisperAPIKey.getValue().replaceAll(" ", "").trim();
+    }
+
+    /**
+     * Extracts language code from prompt text.
+     * Whisper API expects ISO-639-1 language codes (e.g., "en", "es", "fr").
+     * This method attempts to extract language information from the AI prompt.
+     */
+    private static String extractLanguageFromPrompt(String prompt) {
+        // The prompt might contain language information after replacement of #language
+        // For now, we'll let Whisper auto-detect the language
+        // This can be enhanced in the future to extract specific language codes
+        return null; // Auto-detect
     }
 
     public static boolean isAvailable() {
